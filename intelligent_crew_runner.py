@@ -206,25 +206,26 @@ class IntelligentCrewRunner:
 
         return "\n".join(combined)
 
-def run_space_invaders():
-    """Run space invaders generation with intelligent task design"""
+def run_project_generation(project_idea, target_audience="general users", timeline="1-2 weeks"):
+    """Run project generation with intelligent task design"""
 
     runner = IntelligentCrewRunner(
         max_tokens_per_chunk=180000,
         delay_between_chunks=65
     )
 
-    project_idea = "space invaders arcade game with HTML5 canvas, player movement, shooting, enemy waves, collision detection, and scoring"
-
-    print("🚀 Starting space invaders generation...")
+    print(f"🚀 Starting project generation: {project_idea}")
     results = runner.run_intelligent_crew(
         project_idea=project_idea,
-        target_audience="casual gamers who want a quick, fun arcade experience",
-        timeline="1 week"
+        target_audience=target_audience,
+        timeline=timeline
     )
 
-    # Save results
-    output_dir = "/Users/brettstark/Projects/space-invaders-game"
+    # Save results - create directory name from project idea
+    project_name = project_idea.lower().replace(' ', '-').replace(',', '').replace('&', 'and')
+    # Keep only alphanumeric, hyphens, and limit length
+    project_name = ''.join(c for c in project_name if c.isalnum() or c in '-')[:50]
+    output_dir = f"/Users/brettstark/Projects/{project_name}"
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 
     # Save detailed results
@@ -253,8 +254,31 @@ def run_space_invaders():
     return results
 
 if __name__ == "__main__":
-    result = run_space_invaders()
-    print("\n🎉 SPACE INVADERS GENERATION COMPLETE!")
+    import sys
+
+    if len(sys.argv) < 2:
+        print("🤖 INTELLIGENT PROJECT GENERATOR")
+        print("=" * 50)
+        print("Usage: python intelligent_crew_runner.py \"<project_idea>\" [target_audience] [timeline]")
+        print()
+        print("Examples:")
+        print('  python intelligent_crew_runner.py "tetris puzzle game with falling blocks"')
+        print('  python intelligent_crew_runner.py "todo list web app with user accounts" "productivity users"')
+        print('  python intelligent_crew_runner.py "weather dashboard" "general users" "1 week"')
+        print()
+        print("Available project types:")
+        print("  🎮 Games: space invaders, tetris, platformer, card games")
+        print("  💻 Web Apps: todo lists, dashboards, calculators, tools")
+        print("  📱 Mobile Apps: responsive web apps with mobile features")
+        print("  🤖 AI Tools: chatbots, generators, analyzers")
+        sys.exit(1)
+
+    project_idea = sys.argv[1]
+    target_audience = sys.argv[2] if len(sys.argv) > 2 else "general users"
+    timeline = sys.argv[3] if len(sys.argv) > 3 else "1-2 weeks"
+
+    result = run_project_generation(project_idea, target_audience, timeline)
+    print(f"\n🎉 PROJECT GENERATION COMPLETE: {project_idea}")
 
     if 'combined' in result:
         print("✅ Successfully generated project with custom tasks")
