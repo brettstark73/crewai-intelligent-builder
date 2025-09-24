@@ -30,9 +30,19 @@ class TaskDesignerAgent:
             - What development phases and tasks are needed
             - What potential challenges and requirements exist
 
-            SPECIAL EXPERTISE: You understand common Web API patterns and their lifecycle requirements,
-            especially Web Audio API which needs audioContext.resume() on EVERY user interaction that
-            starts or restarts functionality, not just the initial page load.
+            SPECIAL EXPERTISE: You understand common failure patterns and their prevention:
+
+            GAMES: Memory leaks from uncleaned intervals/requestAnimationFrame, audio lifecycle issues,
+            input event cleanup, mobile browser quirks, canvas rendering problems, game state corruption
+
+            WEB APPS: Form validation bypasses, authentication flow breaks, API integration failures,
+            XSS vulnerabilities, responsive design issues, accessibility problems
+
+            MOBILE: Touch event conflicts, orientation handling, device integration failures,
+            platform-specific behaviors, performance on lower-end devices
+
+            AI TOOLS: Model loading failures, rate limiting issues, input/output validation problems,
+            fallback mechanism absence, user experience during processing delays
 
             You create detailed project analysis that guides the entire development process.""",
             verbose=True,
@@ -125,17 +135,40 @@ class TaskDesignerAgent:
             5. DEPENDENCIES: What other tasks must be completed first
             6. ESTIMATED COMPLEXITY: Simple/Medium/Complex
 
-            IMPORTANT GUIDELINES:
-            - For GAMES: Focus on game loop, canvas rendering, input handling, collision detection, AND include comprehensive audio testing (Web Audio API lifecycle, sound persistence across restarts, audioContext.resume() on all user interactions)
-            - For WEB APPS: Focus on user interface, data management, API integration
-            - For MOBILE APPS: Focus on native features, responsive design, performance
-            - For AI TOOLS: Focus on model integration, data processing, user interaction
+            CRITICAL TESTING PATTERNS BY PROJECT TYPE:
 
-            CRITICAL FOR GAMES WITH SOUND: Always include a specific "Audio System Validation" task that ensures:
-            - Sound works on initial game start
-            - Sound continues working after game restart/reset
-            - audioContext.resume() is called on ALL user interactions (start, restart, resume)
-            - Test complete audio lifecycle: start → play → die → restart → sounds still work
+            FOR GAMES - Always include these validation tasks:
+            • "Game State Management Testing": Pause/resume/restart functionality, memory leak prevention (cleanup intervals/requestAnimationFrame), browser tab focus/blur handling
+            • "Audio System Validation": Sound lifecycle testing, mobile browser compatibility, audioContext.resume() on ALL interactions, multiple sound overlap handling
+            • "Input System Reliability": Keyboard cleanup, simultaneous key presses, mobile touch, prevent browser defaults (arrow keys scrolling)
+            • "Performance & Rendering": Canvas clearing, animation cleanup, mobile device performance, rendering degradation over time
+            • "Cross-Browser Game Testing": Different browsers, mobile devices, full-screen functionality
+
+            FOR WEB APPS/SaaS - Always include these validation tasks:
+            • "Form & Data Integrity Testing": Client+server validation, CRUD operations, data persistence, XSS prevention, input sanitization
+            • "Authentication Flow Testing": Login/logout completeness, session timeout, protected routes, CSRF protection
+            • "API Integration Robustness": Network failure handling, rate limiting, loading states, timeout handling, error user feedback
+            • "Responsive & Accessibility Testing": Mobile/tablet/desktop layouts, keyboard navigation, screen reader compatibility, loading indicators
+            • "Security Validation": Input sanitization, authentication bypass attempts, data exposure prevention
+
+            FOR MOBILE APPS - Always include these validation tasks:
+            • "Touch & Gesture Testing": Tap/swipe/pinch/long press, orientation changes, screen sizes, touch conflicts with browser gestures
+            • "Device Integration Testing": Camera/GPS/sensors, offline functionality, app lifecycle, platform-specific behaviors
+            • "Mobile Performance Testing": Battery usage, lower-end device performance, network connectivity changes
+            • "Platform Compatibility": iOS Safari quirks, Android Chrome differences, PWA functionality
+
+            FOR AI TOOLS - Always include these validation tasks:
+            • "AI Integration Reliability": API failure handling, fallback mechanisms, rate limiting, quota management
+            • "Data Processing Pipeline": Input validation, preprocessing, output formatting, large input handling, error recovery
+            • "User Experience Flow": Real-time vs batch processing, progress indicators, user feedback during processing
+            • "AI Service Testing": Model loading, initialization, versioning, timeout handling
+
+            UNIVERSAL QUALITY CHECKLIST - Always include these for ALL project types:
+            • "Cross-Browser Compatibility Testing": Chrome, Firefox, Safari, Edge testing
+            • "Performance Optimization": Loading speed, memory usage, responsiveness under load
+            • "Error Handling & User Feedback": Graceful error handling, informative error messages, loading states
+            • "Code Quality & Maintainability": Clean code structure, commented critical sections, consistent patterns
+            • "Final Integration Testing": End-to-end user workflows, edge case handling, production readiness
 
             Ensure tasks will result in a WORKING, TESTABLE implementation that matches the project requirements.
 
