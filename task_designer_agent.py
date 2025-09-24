@@ -30,6 +30,10 @@ class TaskDesignerAgent:
             - What development phases and tasks are needed
             - What potential challenges and requirements exist
 
+            SPECIAL EXPERTISE: You understand common Web API patterns and their lifecycle requirements,
+            especially Web Audio API which needs audioContext.resume() on EVERY user interaction that
+            starts or restarts functionality, not just the initial page load.
+
             You create detailed project analysis that guides the entire development process.""",
             verbose=True,
             allow_delegation=False,
@@ -122,10 +126,16 @@ class TaskDesignerAgent:
             6. ESTIMATED COMPLEXITY: Simple/Medium/Complex
 
             IMPORTANT GUIDELINES:
-            - For GAMES: Focus on game loop, canvas rendering, input handling, collision detection
+            - For GAMES: Focus on game loop, canvas rendering, input handling, collision detection, AND include comprehensive audio testing (Web Audio API lifecycle, sound persistence across restarts, audioContext.resume() on all user interactions)
             - For WEB APPS: Focus on user interface, data management, API integration
             - For MOBILE APPS: Focus on native features, responsive design, performance
             - For AI TOOLS: Focus on model integration, data processing, user interaction
+
+            CRITICAL FOR GAMES WITH SOUND: Always include a specific "Audio System Validation" task that ensures:
+            - Sound works on initial game start
+            - Sound continues working after game restart/reset
+            - audioContext.resume() is called on ALL user interactions (start, restart, resume)
+            - Test complete audio lifecycle: start → play → die → restart → sounds still work
 
             Ensure tasks will result in a WORKING, TESTABLE implementation that matches the project requirements.
 
