@@ -1,0 +1,15 @@
+# CrewAI Intelligent Builder Dependencies
+# Python version required: >=3.10, <3.14
+
+# Core dependencies
+crewai>=0.175.0
+langchain-openai>=0.3.0
+openai>=1.13.3
+
+# Standard library dependencies (included for clarity)
+# - json
+# - os
+# - sys
+# - time
+# - datetime
+# - typing
