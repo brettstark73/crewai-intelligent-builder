@@ -50,7 +50,7 @@ jobs:
           TASK=$(echo "$TASK" | sed 's/@claude//g')
 
           echo "Running Claude Code with task: $TASK"
-          claude-code --non-interactive "$TASK"
+          npx -y @anthropic-ai/claude-code --non-interactive "$TASK"
 
       - name: Create Pull Request
         if: success()
